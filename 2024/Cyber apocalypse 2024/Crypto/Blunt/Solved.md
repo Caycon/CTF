@@ -1,4 +1,4 @@
-
+- Chall sử dụng 1 chút kiến thức về Diffie–Hellman. Ta sẽ sử dụng discrete_log để giải quyết chall này.
 ```Python
 from Crypto.Cipher import AES
 from Crypto.Util.number import long_to_bytes
