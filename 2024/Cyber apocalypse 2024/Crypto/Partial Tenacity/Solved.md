@@ -44,4 +44,5 @@ d = pow(e, -1, (p-1)*(q-1))
 key = RSA.construct((n, e, d))
 flag = PKCS1_OAEP.new(key).decrypt(ct)
 print(flag)
-``` 
+```
+- Flag:`b'HTB{v3r1fy1ng_pr1m3s_m0dul0_p0w3rs_0f_10!}'`
