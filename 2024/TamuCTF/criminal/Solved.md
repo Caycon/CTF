@@ -1,3 +1,11 @@
+**Chall:**
+- [server.py](https://github.com/Caycon/CTF/blob/main/2024/TamuCTF/criminal/server.py)
+
+**Solved:**
+- Với chall này mình sẽ khai thác ở hàm `compress`. Và sau khi tìm hiểu thì ta thấy được hàm này liên quan đến len của chuỗi.
+- Ta thử và nhận ra khi ký tự đó đúng với flag thì len sẽ  bé hơn 1 khi mà ký tự sai.
+- Ta sẽ brute force flag:
+
 ```Python
 from pwn import *
 
