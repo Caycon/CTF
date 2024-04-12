@@ -1,10 +1,28 @@
-```Python
-# # Mở tệp để đọc dưới dạng binary (mode='rb')
-# with open('flag.txt.enc', 'rb') as file:
-#     # Đọc nội dung của tệp vào biến data
-#     data = file.read()
+**Chall:**
+- [flag.txt.enc](https://github.com/Caycon/CTF/blob/main/2024/TamuCTF/truncated-2/flag.txt.enc)
+- [private.pem](https://github.com/Caycon/CTF/blob/main/2024/TamuCTF/truncated-2/private.pem)
+- [public.pem](https://github.com/Caycon/CTF/blob/main/2024/TamuCTF/truncated-2/public.pem)
 
-# # In nội dung tệp
+**Solved:**
+- Chall này tương tự với chall trên. Tuy nhiên sau khi thử các trường hợp thì ta xác định được thứ có trong private key là $dp$ và $dq$.
+- Ta sẽ tìm $p, q$ từ $dp$ và $dq$:
+```Python
+e = 65537
+# dq = 0x94e9fa2c26b0e1c631ced2f86be0207a82751d707b018839565e93f551df596e9d16f05599a2bfb0bbb300064139f383de85c793e058da2cce41a9a0398e40be05bb9b82703fe804164f5ff4d76623d0e4c720fd705ce6eface979489a8b3a2bd6630077699c0aa8da6250c1de8840d3e5afc34db865e0650ce08f828b49ad
+dp = 0x54d4d1981870d799334e5ae5174526d2979e14c6ecc74d7b59600fbf7db4c060481c3d38c83aa4048e4c6ad483a416d43aecc58db7fe8b9e3d114187538c02b22c9197fe3afd23a83f6e9ac33fab55c84776b1de23a6057e91c47e36ab2ac7600adbbfeb4159d8b09d81898f9a04e47b679cbe690daf6a60551f2b8227863377
+n= 25738076489477390048107389684996103882556969202513166288259522036337632736404168235030854616722305580161628671792338702584031628109920559959142086244929697000719839651284769225292474824312234101039383526660410096665677108899401181859913502426847877961086164703198858818644081120668614573404426468513602005820885294275008357193783600514925643269093575426795017766522751748746504263462858714066992146006524560800527477669712171172719903914727042988942644713692028132153937805550877286612258743238152980687480412165259102950423845139742038860174525053539636028083341480124394591958643772596948645492958078465902879395979
+for kp in range(3, e):
+    p_mul = dp * e - 1
+    if p_mul % kp == 0:
+        p = (p_mul // kp) + 1
+        if n%p==0:
+            print(p)
+```
+- Sau khi có $p$ ta tiến hành decrypt RSA như bình thường:
+
+```Python
+# with open('flag.txt.enc', 'rb') as file:
+#     data = file.read()
 # print(data)
 from Crypto.Util.number import *
 # print(bytes_to_long(data))
@@ -19,3 +37,4 @@ d= pow(65537,-1,phi)
 flag= long_to_bytes(pow(c, d, n))
 print(flag)
 ```
+- Flag: `gigem{DP_DQ_r54_7rUNC473D_SDA79}`
