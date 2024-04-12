@@ -1,3 +1,9 @@
+**Source chall:**
+- [flag.txt.enc](https://github.com/Caycon/CTF/blob/main/2024/TamuCTF/truncated-1/flag.txt.enc)
+- [private.pem](https://github.com/Caycon/CTF/blob/main/2024/TamuCTF/truncated-1/private.pem)
+- [public](https://github.com/Caycon/CTF/blob/main/2024/TamuCTF/truncated-1/public.pem)
+
+**Solved:**
 - Đây là chall về RSA và ta được cung cấp một số thông tin về public key và private key.
 - Tuy nhiên private cần phải được khôi phục. Tôi đã tìm được một [link sau](https://blog.cryptohack.org/twitter-secrets).
 - Tại link đó ta được biết rằng sẽ có một số bytes được biệt để chỉ định một số thông số nhất định.
